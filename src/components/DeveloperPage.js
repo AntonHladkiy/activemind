@@ -30,30 +30,30 @@ const DeveloperPage = props => {
         setDate(previousDay.toISOString().slice(0, 10))
     };
     return (
-        <div>
-            <div>
-                <select onChange={handleChange} name={"project"} value={currentActivity.project}>
+        <div className={"container"}>
+            <div className={"form-group"}>
+                <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
                     {props.projects.map((project) => (
                         <option key={project.id+"pr"} value={project.name} >{project.name}</option>
                     ))}
                     <option disabled hidden key={"pr"} value={""}>{"Project"}</option>
                 </select>
-                <select onChange={handleChange} name={"category"} value={currentActivity.category}>
+                <select className="mr-2 select" onChange={handleChange} name={"category"} value={currentActivity.category}>
                     {props.categories.map((category) => (
                         <option key={category.id+"ct"} value={category.name}>{category.name}</option>
                     ))}
                     <option disabled hidden key={"ct"} value={""}>{"Category"}</option>
                 </select>
-                <input className= "w-25" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
+                <input className="form-control-inline input" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
                 {!editing?
-                    <button className="btn btn-success mt-2 mr-2" onClick={()=> {
+                    <button className="btn btn-success  ml-2 mb-1" onClick={()=> {
                         if (!currentActivity.project || !currentActivity.category|| !currentActivity.hours) return;
                         currentActivity.name=props.user.firstName
                         props.saveActivity(currentActivity)
                         }}>Save
                     </button>
                     :
-                    <button className="btn btn-success mt-2 mr-2" onClick={()=> {
+                    <button className="btn btn-success  ml-2 mb-1" onClick={()=> {
                         setEditing(false)
                         if (!currentActivity.project || !currentActivity.category|| !currentActivity.hours) {
                             setCurrentActivity(props.initialActivity)
@@ -65,10 +65,11 @@ const DeveloperPage = props => {
                     </button>}
 
             </div>
-            <div>
-                <button onClick={previousDay}>{"<"}</button>
-                <input type="date" onChange={handleDateChange} value={date}/>
-                <button onClick={nextDay}>{">"}</button>
+
+            <div className={"form-group"}>
+                <button onClick={previousDay} className={"btn"}>{"<"}</button>
+                <input type="date" onChange={handleDateChange} className="form-control-inline w-25 date" value={date}/>
+                <button onClick={nextDay} className={"btn"}>{">"}</button>
             </div>
             <div>
                 <table className={"table"}>
@@ -87,10 +88,10 @@ const DeveloperPage = props => {
                             <td>{activity.category}</td>
                             <td>{activity.hours}</td>
                             <td>
-                                <button onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
+                                <button className={"btn btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
                                     Edit
                                 </button>
-                                <button onClick={()=>{props.removeActivity(activity.id)}}>
+                                <button  className={"btn btn-outline-dark mr-2"} onClick={()=>{props.removeActivity(activity.id)}}>
                                     Delete
                                 </button>
                             </td
@@ -99,9 +100,9 @@ const DeveloperPage = props => {
                     </tbody>
                 </table>
             </div>
-            <div>
+            <h3>
                 Total: {totalHours()}
-            </div>
+            </h3>
         </div>
     );
 }

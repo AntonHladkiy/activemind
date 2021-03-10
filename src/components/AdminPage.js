@@ -31,8 +31,8 @@ const AdminPage = props => {
         setDate(previousDay.toISOString().slice(0, 10))
     };
     return (
-        <div>
-            <div>
+        <div className={"container"}>
+            <div className={"form-group"}>
                 Filters:
                 <select onChange={handleChange} name={"name"} value={currentActivity.name}>
                     {props.users.map((user) => (
@@ -54,8 +54,8 @@ const AdminPage = props => {
                 </select>
                 {editing&&
                     <span>
-                    <input className= "w-25" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
-                    <button className="btn btn-success mt-2 mr-2" onClick={()=> {
+                    <input className= "w-25 input" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
+                    <button className="btn btn-success mt-2 mr-2 mb-1" onClick={()=> {
                         setEditing(false)
                         if (!currentActivity.project || !currentActivity.category|| !currentActivity.hours) {
                             setCurrentActivity(props.initialActivity)
@@ -68,9 +68,9 @@ const AdminPage = props => {
 
             </div>
             <div>
-                <button onClick={previousDay}>{"<"}</button>
-                <input type="date" onChange={handleDateChange} value={date}/>
-                <button onClick={nextDay}>{">"}</button>
+                <button onClick={previousDay} className={"btn"}>{"<"}</button>
+                <input type="date" onChange={handleDateChange} value={date} className="form-control-inline w-25 date" />
+                <button onClick={nextDay} className={"btn"} >{">"}</button>
             </div>
             <div>
                 <table className={"table"}>
@@ -109,10 +109,10 @@ const AdminPage = props => {
                             <td>{activity.category}</td>
                             <td>{activity.hours}</td>
                             <td>
-                                <Link to={"/edit"}><button onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
+                                <button className={"btn btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
                                     Edit
-                                </button></Link>
-                                <button onClick={()=>{props.removeActivity(activity.id)}}>
+                                </button>
+                                <button className={"btn btn-outline-dark mr-2"} onClick={()=>{props.removeActivity(activity.id)}}>
                                     Delete
                                 </button>
                             </td
@@ -121,9 +121,9 @@ const AdminPage = props => {
                     </tbody>
                 </table>
             </div>
-            <div>
+            <h3>
                 Total: {totalHours()}
-            </div>
+            </h3>
         </div>
     );
 }
