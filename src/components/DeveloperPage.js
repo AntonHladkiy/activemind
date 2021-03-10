@@ -66,9 +66,9 @@ const DeveloperPage = props => {
 
             </div>
             <div>
-                <button onClick={previousDay}>{"\<"}</button>
+                <button onClick={previousDay}>{"<"}</button>
                 <input type="date" onChange={handleDateChange} value={date}/>
-                <button onClick={nextDay}>{"\>"}</button>
+                <button onClick={nextDay}>{">"}</button>
             </div>
             <div>
                 <table className={"table"}>
