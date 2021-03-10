@@ -15,6 +15,7 @@ import DeveloperPage from "./DeveloperPage";
 function ActiveMind() {
     const initialActivity={
         id:'',
+        user_id:'',
         name:'',
         project:'',
         category:'',
@@ -171,7 +172,7 @@ function ActiveMind() {
             headers: {
                 Authorization: user.token,
                 Content_Type: "application/json"
-            }}).then ( () =>{
+            }}).then ( (res) =>{
                 setActivities(activities=>activities.map(activity => (activity.id === updatedActivity.id ? {
                     id:updatedActivity.id,
                     name: updatedActivity.name,
