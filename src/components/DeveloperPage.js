@@ -15,7 +15,7 @@ const DeveloperPage = props => {
     const totalHours=()=>{
         let total=0;
         props.activities.filter(activity=>activity.date===date).map((activity) => (
-           total=total+activity.hours
+           total=total+parseInt(activity.hours)
         ))
         return total;
     };
