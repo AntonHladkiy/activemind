@@ -33,7 +33,10 @@ const AdminPage = props => {
     return (
         <div className={"container"}>
             <div className={"form-group"}>
-                Filters:
+                {editing?
+                    <input type="date" onChange={handleChange} value={currentActivity.date} className="form-control-inline w-25 date" />
+                    :
+                    "Filters:"}
                 <select className="mr-2 select" onChange={handleChange} name={"name"} value={currentActivity.name}>
                     {props.users.map((user) => (
                         <option key={user.id} value={user.firstName} >{user.firstName+" "+user.secondName}</option>
@@ -61,7 +64,6 @@ const AdminPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
-                        currentActivity.date=date
                         props.updateActivity(currentActivity)
                         setCurrentActivity(props.initialActivity)
                     }}>Edit

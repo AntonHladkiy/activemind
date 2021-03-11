@@ -32,6 +32,7 @@ const DeveloperPage = props => {
     return (
         <div className={"container"}>
             <div className={"form-group"}>
+                <input type="date" onChange={handleChange} value={currentActivity.date} className="form-control-inline w-25 date" />
                 <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
                     {props.projects.map((project) => (
                         <option key={project.id+"pr"} value={project.name} >{project.name}</option>
@@ -51,7 +52,6 @@ const DeveloperPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
-                        currentActivity.date=date
                         currentActivity.name=props.user.firstName
                         props.saveActivity(currentActivity)
                         }}>Save
