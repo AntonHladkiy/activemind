@@ -47,7 +47,11 @@ const DeveloperPage = props => {
                 <input className="form-control-inline input" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
                 {!editing?
                     <button className="btn btn-success  ml-2 mb-1" onClick={()=> {
-                        if (!currentActivity.project || !currentActivity.category|| !currentActivity.hours) return;
+                        if (!currentActivity.project || !currentActivity.category|| !currentActivity.hours) {
+                            setCurrentActivity(props.initialActivity)
+                            return;
+                        }
+                        currentActivity.date=date
                         currentActivity.name=props.user.firstName
                         props.saveActivity(currentActivity)
                         }}>Save
@@ -59,6 +63,7 @@ const DeveloperPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
+                        currentActivity.date=date
                         props.updateActivity(currentActivity)
                         setCurrentActivity(props.initialActivity)
                         }}>Edit

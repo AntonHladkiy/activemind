@@ -61,6 +61,7 @@ const AdminPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
+                        currentActivity.date=date
                         props.updateActivity(currentActivity)
                         setCurrentActivity(props.initialActivity)
                     }}>Edit
