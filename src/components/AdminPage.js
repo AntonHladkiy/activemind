@@ -34,19 +34,19 @@ const AdminPage = props => {
         <div className={"container"}>
             <div className={"form-group"}>
                 Filters:
-                <select onChange={handleChange} name={"name"} value={currentActivity.name}>
+                <select className="mr-2 select" onChange={handleChange} name={"name"} value={currentActivity.name}>
                     {props.users.map((user) => (
                         <option key={user.id} value={user.firstName} >{user.firstName+" "+user.secondName}</option>
                     ))}
                     <option disabled hidden key={"n"} value={""}>{"User"}</option>
                 </select>
-                <select onChange={handleChange} name={"project"} value={currentActivity.project}>
+                <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
                     {props.projects.map((project) => (
                         <option key={project.id+"pr"} value={project.name} >{project.name}</option>
                     ))}
                     <option disabled hidden key={"pr"} value={""}>{"Project"}</option>
                 </select>
-                <select onChange={handleChange} name={"category"} value={currentActivity.category}>
+                <select className="mr-2 select" onChange={handleChange} name={"category"} value={currentActivity.category}>
                     {props.categories.map((category) => (
                         <option key={category.id+"ct"} value={category.name}>{category.name}</option>
                     ))}
@@ -54,7 +54,7 @@ const AdminPage = props => {
                 </select>
                 {editing&&
                     <span>
-                    <input className= "w-25 input" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
+                    <input className="form-control-inline input" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
                     <button className="btn btn-success mt-2 mr-2 mb-1" onClick={()=> {
                         setEditing(false)
                         if (!currentActivity.project || !currentActivity.category|| !currentActivity.hours) {
