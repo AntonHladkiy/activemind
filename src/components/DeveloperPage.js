@@ -32,7 +32,7 @@ const DeveloperPage = props => {
     return (
         <div className={"container"}>
             <div className={"form-group"}>
-                <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline w-25 date" />
+                <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline mr-2 input date-input" />
                 <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
                     {props.projects.map((project) => (
                         <option key={project.id+"pr"} value={project.name} >{project.name}</option>
@@ -92,7 +92,7 @@ const DeveloperPage = props => {
                             <td>{activity.category}</td>
                             <td>{activity.hours}</td>
                             <td>
-                                <button className={"btn btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
+                                <button className={" btn btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
                                     Edit
                                 </button>
                                 <button  className={"btn btn-outline-dark mr-2"} onClick={()=>{props.removeActivity(activity.id)}}>

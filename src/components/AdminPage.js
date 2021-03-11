@@ -34,9 +34,9 @@ const AdminPage = props => {
         <div className={"container"}>
             <div className={"form-group"}>
                 {editing?
-                    <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline w-25 date" />
+                    <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline mr-2 input date-input" />
                     :
-                    "Filters:"}
+                    <h4>Filters:</h4>}
                 <select className="mr-2 select" onChange={handleChange} name={"name"} value={currentActivity.name}>
                     {props.users.map((user) => (
                         <option key={user.id} value={user.firstName} >{user.firstName+" "+user.secondName}</option>
@@ -97,10 +97,10 @@ const AdminPage = props => {
                                 <td>{activity.category}</td>
                                 <td>{activity.hours}</td>
                                 <td>
-                                    <button onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
+                                    <button className={"btn  btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
                                         Edit
                                     </button>
-                                    <button onClick={()=>{props.removeActivity(activity.id)}}>
+                                    <button className={"btn  btn-outline-dark mr-2"} onClick={()=>{props.removeActivity(activity.id)}}>
                                         Delete
                                     </button>
                                 </td
@@ -112,7 +112,7 @@ const AdminPage = props => {
                             <td>{activity.category}</td>
                             <td>{activity.hours}</td>
                             <td>
-                                <button className={"btn btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
+                                <button className={"btn  btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
                                     Edit
                                 </button>
                                 <button className={"btn btn-outline-dark mr-2"} onClick={()=>{props.removeActivity(activity.id)}}>

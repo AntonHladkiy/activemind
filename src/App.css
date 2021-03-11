@@ -36,11 +36,6 @@
     transform: rotate(360deg);
   }
 }
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 select,input {
   background-color: transparent;
   border: none;
@@ -58,15 +53,21 @@ select,input {
 .select,.input {
   width: 100%;
   min-width: 15ch;
-  max-width: 30ch;
+  max-width: 20ch;
   border: 1px solid var(--select-border);
   border-radius: 0.25em;
   padding: 0.4em 0.5em;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: lighter;
   line-height: 1.1;
   background-color: #fff;
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
+.input{
+  padding: 0.6em 0.5em;
+}
+.date-input{
+  padding: 0.42em 0.5em;
 }
 .date{
   border: 1px solid var(--select-border);
