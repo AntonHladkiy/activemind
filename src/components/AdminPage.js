@@ -31,7 +31,7 @@ const AdminPage = props => {
         setDate(previousDay.toISOString().slice(0, 10))
     };
     return (
-        <div className={"container"}>
+        <div className={"container dashboard"}>
             <div className={"form-group"}>
                 {editing?
                     <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline mr-2 input date-input" />
@@ -75,7 +75,7 @@ const AdminPage = props => {
                 <input type="date" onChange={handleDateChange} value={date} className="form-control-inline w-25 date" />
                 <button onClick={nextDay} className={"btn"} >{">"}</button>
             </div>
-            <div>
+            <div className="table-wrapper-scroll-y my-custom-scrollbar">
                 <table className={"table"}>
                     <thead>
                     <tr>

@@ -14,7 +14,8 @@ const Login = props => {
         return <Redirect to="/"></Redirect>
     }
     return (
-        <form autoComplete="off" >
+        <div className={"container"}>
+        <form className="form" autoComplete="off" >
             <div className={"form-group"}>
                 <input className= "form-control w-50 mb-2" type="text" name="email" placeholder="email" value={user.email} onChange={handleInputChange} ></input>
             </div>
@@ -27,6 +28,7 @@ const Login = props => {
             }}>Log In</button></Link>
             <Link to ="/"><button  className={"btn btn-danger mt-2 w-25"}>Cancel</button></Link>
         </form>
+        </div>
     )
 }
 export default Login;

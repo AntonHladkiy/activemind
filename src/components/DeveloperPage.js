@@ -30,7 +30,7 @@ const DeveloperPage = props => {
         setDate(previousDay.toISOString().slice(0, 10))
     };
     return (
-        <div className={"container"}>
+        <div className={"container dashboard"}>
             <div className={"form-group"}>
                 <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline mr-2 input date-input" />
                 <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
@@ -75,7 +75,7 @@ const DeveloperPage = props => {
                 <input type="date" onChange={handleDateChange} className="form-control-inline w-25 date" value={date}/>
                 <button onClick={nextDay} className={"btn"}>{">"}</button>
             </div>
-            <div>
+            <div className="table-wrapper-scroll-y my-custom-scrollbar">
                 <table className={"table"}>
                         <thead>
                         <tr>

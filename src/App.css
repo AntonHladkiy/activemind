@@ -1,7 +1,8 @@
 .App {
-  text-align: center;
 }
-
+.dashboard{
+  text-align:center;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -73,4 +74,12 @@ select,input {
   border: 1px solid var(--select-border);
   border-radius: 0.25em;
   padding: 0.4em 0.5em;
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 400px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
 }
