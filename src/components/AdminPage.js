@@ -68,7 +68,7 @@ const AdminPage = props => {
                         setCurrentActivity(props.initialActivity)
                     }}>Edit
                     </button></span>}
-                <button className="btn btn-outline-danger ml-2 mb-1" onClick={()=> {setCurrentActivity(props.initialActivity); setEditing(false)}}>x</button>
+                <button className="btn btn-outline-danger ml-2" onClick={()=> {setCurrentActivity(props.initialActivity); setEditing(false)}}>x</button>
 
             </div>
             <div>
@@ -76,7 +76,7 @@ const AdminPage = props => {
                 <input type="date" onChange={handleDateChange} value={date} className="form-control-inline w-25 date" />
                 <button onClick={nextDay} className={"btn"} >{">"}</button>
             </div>
-            <div className="table-wrapper-scroll-y my-custom-scrollbar">
+            <div className="tableFixHead">
                 <table className={"table"}>
                     <thead>
                     <tr>
@@ -123,11 +123,14 @@ const AdminPage = props => {
                             ></tr>
                     ))}
                     </tbody>
+                    <thead>
+                    <tr>
+                        <th className={"total"} colSpan={"3"}>Total: {totalHours()}</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
                 </table>
             </div>
-            <h3>
-                Total: {totalHours()}
-            </h3>
         </div>
     );
 }

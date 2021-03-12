@@ -76,8 +76,8 @@ const DeveloperPage = props => {
                 <input type="date" onChange={handleDateChange} className="form-control-inline w-25 date" value={date}/>
                 <button onClick={nextDay} className={"btn"}>{">"}</button>
             </div>
-            <div className="table-wrapper-scroll-y my-custom-scrollbar">
-                <table className={"table"}>
+            <div className="tableFixHead">
+                <table className={"table "}>
                         <thead>
                         <tr>
                             <th scope="col">Project</th>
@@ -86,7 +86,7 @@ const DeveloperPage = props => {
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
-                    <tbody>
+                    <tbody className={"body"}>
                     {props.activities.filter(activity=>activity.date===date).map((activity) => (
                         <tr key={activity.id+"ac"}>
                             <td>{activity.project}</td>
@@ -103,11 +103,14 @@ const DeveloperPage = props => {
                         ></tr>
                     ))}
                     </tbody>
+                    <thead>
+                    <tr>
+                        <th className={"total"} colSpan={"3"}>Total: {totalHours()}</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
                 </table>
             </div>
-            <h3>
-                Total: {totalHours()}
-            </h3>
         </div>
     );
 }

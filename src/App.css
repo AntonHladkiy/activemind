@@ -3,6 +3,9 @@
 .dashboard{
   text-align:center;
 }
+.total {
+  text-align: end;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -75,11 +78,10 @@ select,input {
   border-radius: 0.25em;
   padding: 0.4em 0.5em;
 }
-.my-custom-scrollbar {
-  position: relative;
-  height: 400px;
-  overflow: auto;
-}
-.table-wrapper-scroll-y {
-  display: block;
-}
+.tableFixHead          { overflow-y: auto; height: 500px; }
+.tableFixHead thead th { position: sticky; bottom: -1px;top:-1px; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+table {padding: 0}
+th     { background:#eee; }
