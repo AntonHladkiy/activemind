@@ -58,7 +58,7 @@ const AdminPage = props => {
                 {editing&&
                     <span>
                     <input className="form-control-inline input" type="number" name="hours" value={currentActivity.hours} onChange={handleChange} placeholder={"hours"}/>
-                    <button className="btn btn-success mt-2 mr-2 mb-1" onClick={()=> {
+                    <button className="btn btn-success ml-2 mb-1" onClick={()=> {
                         setEditing(false)
                         if (!currentActivity.project || !currentActivity.category|| !currentActivity.hours) {
                             setCurrentActivity(props.initialActivity)
@@ -68,6 +68,7 @@ const AdminPage = props => {
                         setCurrentActivity(props.initialActivity)
                     }}>Edit
                     </button></span>}
+                <button className="btn btn-outline-danger ml-2 mb-1" onClick={()=> {setCurrentActivity(props.initialActivity); setEditing(false)}}>x</button>
 
             </div>
             <div>

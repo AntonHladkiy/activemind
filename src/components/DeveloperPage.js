@@ -67,6 +67,7 @@ const DeveloperPage = props => {
                         setCurrentActivity(props.initialActivity)
                         }}>Edit
                     </button>}
+                <button className="btn btn-outline-danger ml-2 mb-1" onClick={()=> {setCurrentActivity(props.initialActivity); setEditing(false)}}>x</button>
 
             </div>
 
