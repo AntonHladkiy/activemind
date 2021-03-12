@@ -86,7 +86,7 @@ const DeveloperPage = props => {
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
-                    <tbody className={"body"}>
+                    <tbody >
                     {props.activities.filter(activity=>activity.date===date).map((activity) => (
                         <tr key={activity.id+"ac"}>
                             <td>{activity.project}</td>
