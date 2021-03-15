@@ -7,6 +7,7 @@ const DeveloperPage = props => {
     const handleChange = event => {
         const { name, value } = event.target
         setCurrentActivity({ ...currentActivity, [name]: value })
+        props.loadActivities(props.token,currentActivity,date)
     };
     const handleDateChange = event => {
         const { value } = event.target
@@ -35,13 +36,13 @@ const DeveloperPage = props => {
                 <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline mr-2 input date-input" />
                 <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
                     {props.projects.map((project) => (
-                        <option key={project.id+"pr"} value={project.name} >{project.name}</option>
+                        <option key={project.id+"pr"} value={project.id} >{project.name}</option>
                     ))}
                     <option disabled hidden key={"pr"} value={""}>{"Project"}</option>
                 </select>
                 <select className="mr-2 select" onChange={handleChange} name={"category"} value={currentActivity.category}>
                     {props.categories.map((category) => (
-                        <option key={category.id+"ct"} value={category.name}>{category.name}</option>
+                        <option key={category.id+"ct"} value={category.id}>{category.name}</option>
                     ))}
                     <option disabled hidden key={"ct"} value={""}>{"Category"}</option>
                 </select>

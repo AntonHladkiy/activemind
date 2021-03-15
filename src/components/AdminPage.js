@@ -8,10 +8,12 @@ const AdminPage = props => {
     const handleChange = event => {
         const { name, value } = event.target
         setCurrentActivity({ ...currentActivity, [name]: value })
+        props.loadActivities(props.token,currentActivity,date)
     };
     const handleDateChange = event => {
         const { value } = event.target
-        setDate(value)
+        setDate(value.toISOString().slice(0, 10))
+        props.loadActivities(props.token,currentActivity,value.toISOString().slice(0, 10))
     };
     const totalHours=()=>{
         let total=0;
@@ -24,11 +26,13 @@ const AdminPage = props => {
         const nextDay=new Date(date)
         nextDay.setDate(nextDay.getDate()+1)
         setDate(nextDay.toISOString().slice(0, 10))
+        props.loadActivities(props.token,currentActivity,nextDay)
     };
     const previousDay=()=>{
         const previousDay=new Date(date)
         previousDay.setDate(previousDay.getDate()-1)
         setDate(previousDay.toISOString().slice(0, 10))
+        props.loadActivities(props.token,currentActivity,previousDay)
     };
     return (
         <div className={"container dashboard"}>
@@ -39,19 +43,19 @@ const AdminPage = props => {
                     <h4>Filters:</h4>}
                 <select className="mr-2 select" onChange={handleChange} name={"name"} value={currentActivity.name}>
                     {props.users.map((user) => (
-                        <option key={user.id} value={user.firstName} >{user.firstName+" "+user.lastName}</option>
+                        <option key={user.id} value={user.id} >{user.firstName+" "+user.lastName}</option>
                     ))}
                     <option disabled hidden key={"n"} value={""}>{"User"}</option>
                 </select>
                 <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
                     {props.projects.map((project) => (
-                        <option key={project.id+"pr"} value={project.name} >{project.name}</option>
+                        <option key={project.id+"pr"} value={project.id} >{project.name}</option>
                     ))}
                     <option disabled hidden key={"pr"} value={""}>{"Project"}</option>
                 </select>
                 <select className="mr-2 select" onChange={handleChange} name={"category"} value={currentActivity.category}>
                     {props.categories.map((category) => (
-                        <option key={category.id+"ct"} value={category.name}>{category.name}</option>
+                        <option key={category.id+"ct"} value={category.id}>{category.name}</option>
                     ))}
                     <option disabled hidden key={"ct"} value={""}>{"Category"}</option>
                 </select>
@@ -88,25 +92,7 @@ const AdminPage = props => {
                     </tr>
                     </thead>
                     <tbody>
-                    {!editing?props.activities.filter(activity=>activity.date===date)
-                        .filter(activity=>activity.project.includes(currentActivity.project))
-                        .filter(activity=>activity.category.includes(currentActivity.category))
-                        .filter(activity=>activity.name.includes(currentActivity.name)).map((activity) => (
-                            <tr key={activity.id+"ac"}>
-                                <td>{activity.name}</td>
-                                <td>{activity.project}</td>
-                                <td>{activity.category}</td>
-                                <td>{activity.hours}</td>
-                                <td>
-                                    <button className={"btn  btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
-                                        Edit
-                                    </button>
-                                    <button className={"btn  btn-outline-dark mr-2"} onClick={()=>{props.removeActivity(activity.id)}}>
-                                        Delete
-                                    </button>
-                                </td
-                                ></tr>))
-                        :props.activities.filter(activity=>activity.date===date).map((activity) => (
+                    {props.activities.map((activity) => (
                         <tr key={activity.id+"ac"}>
                             <td>{activity.name}</td>
                             <td>{activity.project}</td>

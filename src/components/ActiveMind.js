@@ -51,8 +51,13 @@ function ActiveMind() {
             }
         }}},[]
     )
-    const loadActivities=(token)=>{
+    const loadActivities=(token,filters,date)=>{
+        console.log(filters)
         axios.get('https://activemind-api.herokuapp.com/api/v1/activities',{
+            params:{
+                filters:filters,
+                date:date
+            },
             headers: {
                 Authorization:token //the token is a variable which holds the token
             }})
@@ -210,14 +215,17 @@ function ActiveMind() {
                         <div>
                             <AdminPage user={user} categories={categories} projects={projects}
                                        initialActivity={initialActivity} activities={activities}
-                                       removeActivity={removeActivity} updateActivity={updateActivity} users={users}/>
+                                       removeActivity={removeActivity} updateActivity={updateActivity} users={users} loadActivities={loadActivities}
+                                       token={user.token}
+                            />
                         </div>
                     }
                     {(user.role==="developer") &&
                         <div>
                             <DeveloperPage user={user} categories={categories} projects={projects}
                                            initialActivity={initialActivity} saveActivity={saveActivity} activities={activities}
-                                           removeActivity={removeActivity} updateActivity={updateActivity}
+                                           removeActivity={removeActivity} updateActivity={updateActivity} loadActivities={loadActivities}
+                                           token={user.token}
                             />
                         </div>
                     }
