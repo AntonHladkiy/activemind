@@ -26,7 +26,7 @@ function ActiveMind() {
         token:'',
         role:'',
         firstName:'',
-        secondName:''
+        lastName:''
     }
     const qs = require('qs');
     const [activities, setActivities] = useState([]);
@@ -104,13 +104,13 @@ function ActiveMind() {
                             token:res.data.token,
                             role:res.data.user.role,
                             firstName:res.data.user.firstName,
-                            secondName:res.data.user.secondName
+                            lastName:res.data.user.lastName
                         })
                         sessionStorage.setItem('user',qs.stringify({
                             token:res.data.token,
                             role:res.data.user.role,
                             firstName:res.data.user.firstName,
-                            secondName:res.data.user.secondName
+                            lastName:res.data.user.lastName
                         }))
                         setLoggedIn(true)
                         loadActivities(res.data.token)

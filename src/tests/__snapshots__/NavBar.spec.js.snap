@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar logged in should render the NavBar Component correctly 1`] = `
+<header
+  className="d-flex flex-column p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
+>
+  <nav
+    className="navbar navbar-light bg-light justify-content-between"
+  >
+    <a
+      className="navbar-brand"
+    >
+      Active Mind
+    </a>
+    <span
+      className="navbar-text "
+    >
+      <span
+        className="mr-2"
+      >
+        <Link
+          to="/"
+        >
+           Main page
+        </Link>
+      </span>
+      <span
+        className="mr-2"
+      >
+        <Link
+          to="/"
+        >
+           Log Out
+        </Link>
+      </span>
+    </span>
+  </nav>
+</header>
+`;
+
+exports[`NavBar not logged in should render the NavBar Component correctly 1`] = `
+<header
+  className="d-flex flex-column p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
+>
+  <nav
+    className="navbar navbar-light bg-light justify-content-between"
+  >
+    <a
+      className="navbar-brand"
+    >
+      Active Mind
+    </a>
+    <span
+      className="navbar-text "
+    >
+      <span
+        className="mr-2"
+      >
+        <Link
+          to="/"
+        >
+           Main page
+        </Link>
+      </span>
+      <span
+        className="mr-2"
+      >
+        <Link
+          to="/login"
+        >
+           Log In
+        </Link>
+      </span>
+    </span>
+  </nav>
+</header>
+`;

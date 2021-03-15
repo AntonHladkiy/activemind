@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActiveMind should render the ActiveMind Component correctly 1`] = `
+<BrowserRouter>
+  <div>
+    <NavBar
+      logOut={[Function]}
+      loggedIn={false}
+      user={Object {}}
+    />
+  </div>
+  <div
+    className="ml-5"
+  >
+    <Switch>
+      <Route
+        path="/login"
+      >
+        <Login
+          logIn={[Function]}
+          loggedIn={false}
+        />
+      </Route>
+      <Route
+        path="/"
+      />
+    </Switch>
+  </div>
+</BrowserRouter>
+`;

@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeveloperPage should render the DeveloperPage Component correctly 1`] = `
+<div
+  className="container dashboard"
+>
+  <div
+    className="form-group"
+  >
+    <input
+      className="form-control-inline mr-2 input date-input"
+      name="date"
+      onChange={[Function]}
+      type="date"
+    />
+    <select
+      className="mr-2 select"
+      name="project"
+      onChange={[Function]}
+    >
+      <option
+        disabled={true}
+        hidden={true}
+        key="pr"
+        value=""
+      >
+        Project
+      </option>
+    </select>
+    <select
+      className="mr-2 select"
+      name="category"
+      onChange={[Function]}
+    >
+      <option
+        disabled={true}
+        hidden={true}
+        key="ct"
+        value=""
+      >
+        Category
+      </option>
+    </select>
+    <input
+      className="form-control-inline input"
+      name="hours"
+      onChange={[Function]}
+      placeholder="hours"
+      type="number"
+    />
+    <button
+      className="btn btn-success  ml-2 mb-1"
+      onClick={[Function]}
+    >
+      Save
+    </button>
+    <button
+      className="btn btn-outline-danger ml-2 mb-1"
+      onClick={[Function]}
+    >
+      x
+    </button>
+  </div>
+  <div
+    className="form-group"
+  >
+    <button
+      className="btn"
+      onClick={[Function]}
+    >
+      &lt;
+    </button>
+    <input
+      className="form-control-inline w-25 date"
+      onChange={[Function]}
+      type="date"
+      value="2021-03-15"
+    />
+    <button
+      className="btn"
+      onClick={[Function]}
+    >
+      &gt;
+    </button>
+  </div>
+  <div
+    className="tableFixHead"
+  >
+    <table
+      className="table "
+    >
+      <thead>
+        <tr>
+          <th
+            scope="col"
+          >
+            Project
+          </th>
+          <th
+            scope="col"
+          >
+            Category
+          </th>
+          <th
+            scope="col"
+          >
+            Hours
+          </th>
+          <th
+            scope="col"
+          >
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+      <thead>
+        <tr>
+          <th
+            className="total"
+            colSpan="3"
+          >
+            Total: 
+            0
+          </th>
+          <th
+            scope="col"
+          />
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+`;

@@ -39,7 +39,7 @@ const AdminPage = props => {
                     <h4>Filters:</h4>}
                 <select className="mr-2 select" onChange={handleChange} name={"name"} value={currentActivity.name}>
                     {props.users.map((user) => (
-                        <option key={user.id} value={user.firstName} >{user.firstName+" "+user.secondName}</option>
+                        <option key={user.id} value={user.firstName} >{user.firstName+" "+user.lastName}</option>
                     ))}
                     <option disabled hidden key={"n"} value={""}>{"User"}</option>
                 </select>
