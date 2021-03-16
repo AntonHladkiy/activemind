@@ -1,9 +1,31 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 
 const DeveloperPage = props => {
     const [currentActivity, setCurrentActivity] = useState(props.initialActivity);
+    const [page,setPage]= useState(1)
     const [date,setDate]=useState(new Date().toISOString().slice(0, 10))
     const [editing,setEditing]=useState(false)
+    useEffect(()=>{
+            if(!editing){
+                if(page===1){
+                    props.loadActivities(props.token,currentActivity,date,page)
+                } else{
+                    setPage(1)
+                }}
+        },[currentActivity]
+    )
+    useEffect(()=>{
+            if(page===1){
+                props.loadActivities(props.token,currentActivity,date,page)
+            } else{
+                setPage(1)
+            }
+        },[date]
+    )
+    useEffect(()=>{
+            props.loadActivities(props.token,currentActivity,date,page)
+        },[page]
+    )
     const handleChange = event => {
         const { name, value } = event.target
         setCurrentActivity({ ...currentActivity, [name]: value })
@@ -29,6 +51,14 @@ const DeveloperPage = props => {
         previousDay.setDate(previousDay.getDate()-1)
         setDate(previousDay.toISOString().slice(0, 10))
     };
+    const nextPage=()=>{
+        setPage(page+1)
+    };
+    const previousPage=()=>{
+        if(page>1){
+            setPage(page-1)
+        }
+    };
     return (
         <div className={"container dashboard"}>
             <div className={"form-group"}>
@@ -53,7 +83,7 @@ const DeveloperPage = props => {
                             return;
                         }
                         currentActivity.name=props.user.firstName
-                        props.saveActivity(currentActivity)
+                        props.saveActivity(currentActivity,date)
                         }}>Save
                     </button>
                     :
@@ -63,7 +93,7 @@ const DeveloperPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
-                        props.updateActivity(currentActivity)
+                        props.updateActivity(currentActivity,date)
                         setCurrentActivity(props.initialActivity)
                         }}>Edit
                     </button>}
@@ -76,7 +106,7 @@ const DeveloperPage = props => {
                 <input type="date" onChange={handleDateChange} className="form-control-inline w-25 date" value={date}/>
                 <button onClick={nextDay} className={"btn"}>{">"}</button>
             </div>
-            <div className="tableFixHead">
+            <div >
                 <table className={"table "}>
                         <thead>
                         <tr>
@@ -87,7 +117,7 @@ const DeveloperPage = props => {
                         </tr>
                         </thead>
                     <tbody >
-                    {props.activities.filter(activity=>activity.date===date).map((activity) => (
+                    {props.activities.map((activity) => (
                         <tr key={activity.id+"ac"}>
                             <td>{activity.project}</td>
                             <td>{activity.category}</td>
@@ -106,7 +136,11 @@ const DeveloperPage = props => {
                     <thead>
                     <tr>
                         <th className={"total"} colSpan={"3"}>Total: {totalHours()}</th>
-                        <th scope="col"></th>
+                        <th className={"total"} scope="col">
+                            <button onClick={previousPage} className={"btn"}>{"<"}</button>
+                            Page: {page}
+                            <button onClick={nextPage} className={"btn"}>{">"}</button>
+                        </th>
                     </tr>
                     </thead>
                 </table>
