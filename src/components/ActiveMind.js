@@ -121,7 +121,7 @@ function ActiveMind() {
                         loadActivities(res.data.token,initialActivity,new Date().toISOString().slice(0, 10),1)
                         loadCategories(res.data.token)
                         loadProjects(res.data.token)
-                        if(res.data.role==="admin"){
+                        if(res.data.user.role==="admin"){
                             loadUsers(res.data.token)
                         }
                         setLoggedIn(true)
