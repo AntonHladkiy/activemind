@@ -118,13 +118,13 @@ function ActiveMind() {
                             firstName:res.data.user.firstName,
                             lastName:res.data.user.lastName
                         }))
-                        setLoggedIn(true)
                         loadActivities(res.data.token,initialActivity,new Date().toISOString().slice(0, 10),1)
                         loadCategories(res.data.token)
                         loadProjects(res.data.token)
                         if(res.data.role==="admin"){
                             loadUsers(res.data.token)
                         }
+                        setLoggedIn(true)
                     }
                 }
             ).catch(error=>console.log(error))
