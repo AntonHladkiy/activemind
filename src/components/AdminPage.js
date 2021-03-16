@@ -1,19 +1,26 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import {Link} from "react-router-dom";
 
 const AdminPage = props => {
     const [currentActivity, setCurrentActivity] = useState(props.initialActivity);
     const [date,setDate]=useState(new Date().toISOString().slice(0, 10))
     const [editing,setEditing]=useState(false)
+    useEffect(()=>{
+        if(!editing){
+        props.loadActivities(props.token,currentActivity,date)}
+        },[currentActivity,date]
+    )
     const handleChange = event => {
         const { name, value } = event.target
         setCurrentActivity({ ...currentActivity, [name]: value })
-        props.loadActivities(props.token,currentActivity,date)
+        if(name==="user_id"){
+            const user=props.users.find(o=>o.id==value)
+            setCurrentActivity({ ...currentActivity, ["name"]: user.firstName })
+        }
     };
     const handleDateChange = event => {
         const { value } = event.target
         setDate(value.toISOString().slice(0, 10))
-        props.loadActivities(props.token,currentActivity,value.toISOString().slice(0, 10))
     };
     const totalHours=()=>{
         let total=0;
@@ -26,13 +33,11 @@ const AdminPage = props => {
         const nextDay=new Date(date)
         nextDay.setDate(nextDay.getDate()+1)
         setDate(nextDay.toISOString().slice(0, 10))
-        props.loadActivities(props.token,currentActivity,nextDay)
     };
     const previousDay=()=>{
         const previousDay=new Date(date)
         previousDay.setDate(previousDay.getDate()-1)
         setDate(previousDay.toISOString().slice(0, 10))
-        props.loadActivities(props.token,currentActivity,previousDay)
     };
     return (
         <div className={"container dashboard"}>
@@ -41,7 +46,7 @@ const AdminPage = props => {
                     <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline mr-2 input date-input" />
                     :
                     <h4>Filters:</h4>}
-                <select className="mr-2 select" onChange={handleChange} name={"name"} value={currentActivity.name}>
+                <select className="mr-2 select" onChange={handleChange} name={"user_id"} value={currentActivity.name}>
                     {props.users.map((user) => (
                         <option key={user.id} value={user.id} >{user.firstName+" "+user.lastName}</option>
                     ))}

@@ -4,10 +4,14 @@ const DeveloperPage = props => {
     const [currentActivity, setCurrentActivity] = useState(props.initialActivity);
     const [date,setDate]=useState(new Date().toISOString().slice(0, 10))
     const [editing,setEditing]=useState(false)
+    useEffect(()=>{
+            if(!editing){
+                props.loadActivities(props.token,props.initialActivity,date)}
+        },[date]
+    )
     const handleChange = event => {
         const { name, value } = event.target
         setCurrentActivity({ ...currentActivity, [name]: value })
-        props.loadActivities(props.token,currentActivity,date)
     };
     const handleDateChange = event => {
         const { value } = event.target
@@ -88,7 +92,7 @@ const DeveloperPage = props => {
                         </tr>
                         </thead>
                     <tbody >
-                    {props.activities.filter(activity=>activity.date===date).map((activity) => (
+                    {props.activities.map((activity) => (
                         <tr key={activity.id+"ac"}>
                             <td>{activity.project}</td>
                             <td>{activity.category}</td>

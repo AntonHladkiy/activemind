@@ -52,8 +52,7 @@ function ActiveMind() {
         }}},[]
     )
     const loadActivities=(token,filters,date)=>{
-        console.log(filters)
-        axios.get('https://activemind-api.herokuapp.com/api/v1/activities',{
+        axios.get('http://localhost:3001/api/v1/activities',{
             params:{
                 filters:filters,
                 date:date
@@ -67,7 +66,7 @@ function ActiveMind() {
     }
 
     const loadCategories=(token)=>{
-        axios.get('https://activemind-api.herokuapp.com/api/v1/categories',{
+        axios.get('http://localhost:3001/api/v1/categories',{
             headers: {
                 Authorization:token //the token is a variable which holds the token
             }})
@@ -76,7 +75,7 @@ function ActiveMind() {
             })
     }
     const loadUsers=(token)=>{
-        axios.get('https://activemind-api.herokuapp.com/api/v1/users',{
+        axios.get('http://localhost:3001/api/v1/users',{
             headers: {
                 Authorization:token //the token is a variable which holds the token
             }})
@@ -86,7 +85,7 @@ function ActiveMind() {
             })
     }
     const loadProjects=(token)=>{
-        axios.get('https://activemind-api.herokuapp.com/api/v1/projects',{
+        axios.get('http://localhost:3001/api/v1/projects',{
             headers: {
                 Authorization:token //the token is a variable which holds the token
             }})
@@ -97,7 +96,7 @@ function ActiveMind() {
 
     const logIn=(user)=>{
 
-        axios.post('https://activemind-api.herokuapp.com/api/v1/auth',{
+        axios.post('http://localhost:3001/api/v1/auth',{
             email:user.email,
             password:user.password
         })
@@ -135,7 +134,7 @@ function ActiveMind() {
     }
     const saveActivity = activity => {
         const qs = require('qs');
-        axios.post('https://activemind-api.herokuapp.com/api/v1/activities', qs.stringify(
+        axios.post('http://localhost:3001/api/v1/activities', qs.stringify(
             {
                 activity:{
                     name: activity.name,
@@ -164,7 +163,7 @@ function ActiveMind() {
     };
     const updateActivity = (updatedActivity) => {
         const qs = require('qs');
-        axios.patch ( 'https://activemind-api.herokuapp.com/api/v1/activities/' + updatedActivity.id, qs.stringify (
+        axios.patch ( 'http://localhost:3001/api/v1/activities/' + updatedActivity.id, qs.stringify (
             {
                 activity: {
                     name: updatedActivity.name,
@@ -191,7 +190,7 @@ function ActiveMind() {
             })
     };
     const removeActivity = id => {
-        axios.delete( 'https://activemind-api.herokuapp.com/api/v1/activities/' + id,{
+        axios.delete( 'http://localhost:3001/api/v1/activities/' + id,{
             headers:{
                 Authorization:user.token,
                 Content_Type:"application/json"
