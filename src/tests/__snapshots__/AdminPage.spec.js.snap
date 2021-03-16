@@ -12,9 +12,8 @@ exports[`AdminPage should render the AdminPage Component correctly 1`] = `
     </h4>
     <select
       className="mr-2 select"
-      name="name"
+      name="user_id"
       onChange={[Function]}
-      value=""
     >
       <option
         disabled={true}
@@ -71,7 +70,7 @@ exports[`AdminPage should render the AdminPage Component correctly 1`] = `
       className="form-control-inline w-25 date"
       onChange={[Function]}
       type="date"
-      value="2021-03-15"
+      value="2021-03-16"
     />
     <button
       className="btn"
@@ -80,9 +79,7 @@ exports[`AdminPage should render the AdminPage Component correctly 1`] = `
       &gt;
     </button>
   </div>
-  <div
-    className="tableFixHead"
-  >
+  <div>
     <table
       className="table"
     >
@@ -120,14 +117,34 @@ exports[`AdminPage should render the AdminPage Component correctly 1`] = `
         <tr>
           <th
             className="total"
-            colSpan="3"
+            colSpan="4"
           >
             Total: 
             0
           </th>
           <th
+            className="total"
             scope="col"
-          />
+          >
+            <div
+              className="form-group"
+            >
+              <button
+                className="btn"
+                onClick={[Function]}
+              >
+                &lt;
+              </button>
+              Page: 
+              1
+              <button
+                className="btn"
+                onClick={[Function]}
+              >
+                &gt;
+              </button>
+            </div>
+          </th>
         </tr>
       </thead>
     </table>
