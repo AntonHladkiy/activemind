@@ -129,7 +129,12 @@ const AdminPage = props => {
                                 <button className={"btn  btn-outline-dark mr-2"} onClick={()=>{setCurrentActivity(activity); setEditing(true)}}>
                                     Edit
                                 </button>
-                                <button className={"btn btn-outline-dark mr-2"} onClick={()=>{props.removeActivity(activity.id)}}>
+                                <button className={"btn btn-outline-dark mr-2"} onClick={()=>{
+                                    if(editing){
+                                        setEditing(false)
+                                        setCurrentActivity(props.initialActivity)
+                                    }
+                                    props.removeActivity(activity.id,currentActivity,page)}}>
                                     Delete
                                 </button>
                             </td

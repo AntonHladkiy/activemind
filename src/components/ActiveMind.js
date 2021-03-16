@@ -183,7 +183,7 @@ function ActiveMind() {
                 alert("Wrong form format try again");
             })
     };
-    const removeActivity = id => {
+    const removeActivity = (id,date,page) => {
         setLoading(true)
         axios.delete( 'https://activemind-api.herokuapp.com/api/v1/activities/' + id,{
             headers:{
@@ -191,8 +191,7 @@ function ActiveMind() {
                 Content_Type:"application/json"
             }})
             .then(() => {
-                setActivities(activities=>activities.filter(activity => activity.id !== id))
-                setLoading(false)
+                loadActivities(user.token,initialActivity,date,page)
             })
             .catch(error => console.log(error))
     };
