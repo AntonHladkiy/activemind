@@ -138,8 +138,8 @@ const AdminPage = props => {
                     </tbody>
                     <thead>
                     <tr>
-                        <th className={"total"} colSpan={"3"}>Total: {totalHours()}</th>
-                        <th scope="col">
+                        <th className={"total"} colSpan={"4"}>Total: {totalHours()}</th>
+                        <th scope="col" className={"total"}>
                             <div className={"form-group"}>
                                 <button onClick={previousPage} className={"btn"}>{"<"}</button>
                                 Page: {page}

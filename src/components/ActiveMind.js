@@ -82,6 +82,7 @@ function ActiveMind() {
                 Authorization:token //the token is a variable which holds the token
             }})
             .then(res => {
+               // console.log("data received")
                 setUsers(res.data)
             })
     }
