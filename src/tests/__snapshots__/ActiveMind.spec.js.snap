@@ -4,6 +4,7 @@ exports[`ActiveMind should render the ActiveMind Component correctly 1`] = `
 <BrowserRouter>
   <div>
     <NavBar
+      loading={false}
       logOut={[Function]}
       loggedIn={false}
       user={Object {}}

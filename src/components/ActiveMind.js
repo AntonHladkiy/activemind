@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+
 import axios from 'axios';
 import {
     BrowserRouter as Router,
@@ -10,9 +11,8 @@ import NavBar from "./NavBar";
 import Login from "./Login";
 import DeveloperPage from "./DeveloperPage";
 
-
-
 function ActiveMind() {
+
     const initialActivity={
         id:'',
         user_id:'',
@@ -28,6 +28,7 @@ function ActiveMind() {
         lastName:''
     }
     const qs = require('qs');
+    const [loading,setLoading] = useState(false)
     const [activities, setActivities] = useState([]);
     const [projects, setProjects] = useState([]);
     const [users, setUsers] = useState([]);
@@ -40,6 +41,7 @@ function ActiveMind() {
         if(user){
         if(user.token){
             if(user.token!==''){
+                setLoading(true)
                 loadActivities(user.token,initialActivity,new Date().toISOString().slice(0, 10),1)
                 loadCategories(user.token)
                 loadProjects(user.token)
@@ -47,10 +49,12 @@ function ActiveMind() {
                     loadUsers(user.token)
                 }
                 setLoggedIn(true)
+                setLoading(false)
             }
         }}},[]
     )
     const loadActivities=(token,filters,date,page)=>{
+        setLoading(true)
         axios.get('https://activemind-api.herokuapp.com/api/v1/activities',{
             params:{
                 user_id:filters.user_id,
@@ -64,6 +68,7 @@ function ActiveMind() {
             }})
             .then(res => {
                 setActivities(res.data)
+                setLoading(false)
             })
     }
 
@@ -97,7 +102,7 @@ function ActiveMind() {
     }
 
     const logIn=(user)=>{
-
+        setLoading(true)
         axios.post('https://activemind-api.herokuapp.com/api/v1/auth',{
             email:user.email,
             password:user.password
@@ -125,6 +130,7 @@ function ActiveMind() {
                             loadUsers(res.data.token)
                         }
                         setLoggedIn(true)
+                        setLoading(false)
                     }
                 }
             ).catch(error=>console.log(error))
@@ -134,7 +140,8 @@ function ActiveMind() {
         setLoggedIn(false)
         sessionStorage.removeItem('user')
     }
-    const saveActivity = (activity,date) => {
+    const saveActivity = (activity,date,page) => {
+        setLoading(true)
         const qs = require('qs');
         axios.post('https://activemind-api.herokuapp.com/api/v1/activities', qs.stringify(
             {
@@ -149,13 +156,14 @@ function ActiveMind() {
                 Authorization: user.token,
                 Content_Type: "application/json"
             }})
-            .then(res=>{ loadActivities(user.token,initialActivity,date,1)})
+            .then(res=>{ loadActivities(user.token,initialActivity,date,page)})
             .catch( error => {
                 alert("Wrong form format try again");
                 console.log(error)
             })
     };
-    const updateActivity = (updatedActivity,date) => {
+    const updateActivity = (updatedActivity,date,page) => {
+        setLoading(true)
         const qs = require('qs');
         axios.patch ( 'https://activemind-api.herokuapp.com/api/v1/activities/' + updatedActivity.id, qs.stringify (
             {
@@ -170,12 +178,13 @@ function ActiveMind() {
             headers: {
                 Authorization: user.token,
                 Content_Type: "application/json"
-            }}).then ( (res) =>{loadActivities(user.token,initialActivity,date,1)})
+            }}).then ( (res) =>{loadActivities(user.token,initialActivity,date,page)})
             .catch(()=>{
                 alert("Wrong form format try again");
             })
     };
     const removeActivity = id => {
+        setLoading(true)
         axios.delete( 'https://activemind-api.herokuapp.com/api/v1/activities/' + id,{
             headers:{
                 Authorization:user.token,
@@ -183,13 +192,14 @@ function ActiveMind() {
             }})
             .then(() => {
                 setActivities(activities=>activities.filter(activity => activity.id !== id))
+                setLoading(false)
             })
             .catch(error => console.log(error))
     };
 
     return (
         <Router>
-            <div><NavBar user={user} loggedIn={loggedIn} logOut={logOut}/></div>
+            <div><NavBar user={user} loggedIn={loggedIn} logOut={logOut} loading={loading}/></div>
             <div  className={"ml-5"}>
             <Switch>
                 <Route path='/login'>

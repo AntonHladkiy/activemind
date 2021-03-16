@@ -95,7 +95,7 @@ const AdminPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
-                        props.updateActivity(currentActivity,date)
+                        props.updateActivity(currentActivity,date,page)
                         setCurrentActivity(props.initialActivity)
                     }}>Edit
                     </button></span>}

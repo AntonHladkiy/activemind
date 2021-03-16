@@ -6,15 +6,6 @@ const DeveloperPage = props => {
     const [date,setDate]=useState(new Date().toISOString().slice(0, 10))
     const [editing,setEditing]=useState(false)
     useEffect(()=>{
-            if(!editing){
-                if(page===1){
-                    props.loadActivities(props.token,currentActivity,date,page)
-                } else{
-                    setPage(1)
-                }}
-        },[currentActivity]
-    )
-    useEffect(()=>{
             if(page===1){
                 props.loadActivities(props.token,currentActivity,date,page)
             } else{
@@ -83,7 +74,8 @@ const DeveloperPage = props => {
                             return;
                         }
                         currentActivity.name=props.user.firstName
-                        props.saveActivity(currentActivity,date)
+                        props.saveActivity(currentActivity,date,page)
+
                         }}>Save
                     </button>
                     :
@@ -93,7 +85,7 @@ const DeveloperPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
-                        props.updateActivity(currentActivity,date)
+                        props.updateActivity(currentActivity,date,page)
                         setCurrentActivity(props.initialActivity)
                         }}>Edit
                     </button>}
