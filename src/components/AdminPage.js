@@ -3,20 +3,34 @@ import {Link} from "react-router-dom";
 
 const AdminPage = props => {
     const [currentActivity, setCurrentActivity] = useState(props.initialActivity);
+    const [page,setPage]= useState(1)
     const [date,setDate]=useState(new Date().toISOString().slice(0, 10))
     const [editing,setEditing]=useState(false)
     useEffect(()=>{
         if(!editing){
-        props.loadActivities(props.token,currentActivity,date)}
-        },[currentActivity,date]
+            if(page===1){
+                props.loadActivities(props.token,currentActivity,date,page)
+            } else{
+                setPage(1)
+            }
+           }
+        },[currentActivity]
+    )
+    useEffect(()=>{
+            if(page===1){
+                props.loadActivities(props.token,currentActivity,date,page)
+            } else{
+                setPage(1)
+            }
+        },[date]
+    )
+    useEffect(()=>{
+        props.loadActivities(props.token,currentActivity,date,page)
+        },[page]
     )
     const handleChange = event => {
         const { name, value } = event.target
         setCurrentActivity({ ...currentActivity, [name]: value })
-        if(name==="user_id"){
-            const user=props.users.find(o=>o.id==value)
-            setCurrentActivity({ ...currentActivity, ["name"]: user.firstName })
-        }
     };
     const handleDateChange = event => {
         const { value } = event.target
@@ -39,6 +53,14 @@ const AdminPage = props => {
         previousDay.setDate(previousDay.getDate()-1)
         setDate(previousDay.toISOString().slice(0, 10))
     };
+    const nextPage=()=>{
+        setPage(page+1)
+    };
+    const previousPage=()=>{
+        if(page>1){
+            setPage(page-1)
+        }
+    };
     return (
         <div className={"container dashboard"}>
             <div className={"form-group"}>
@@ -46,7 +68,7 @@ const AdminPage = props => {
                     <input type="date" onChange={handleChange} name={"date"} value={currentActivity.date} className="form-control-inline mr-2 input date-input" />
                     :
                     <h4>Filters:</h4>}
-                <select className="mr-2 select" onChange={handleChange} name={"user_id"} value={currentActivity.name}>
+                <select className="mr-2 select" onChange={handleChange} name={"user_id"} value={currentActivity.user_id}>
                     {props.users.map((user) => (
                         <option key={user.id} value={user.id} >{user.firstName+" "+user.lastName}</option>
                     ))}
@@ -54,13 +76,13 @@ const AdminPage = props => {
                 </select>
                 <select className="mr-2 select" onChange={handleChange} name={"project"} value={currentActivity.project}>
                     {props.projects.map((project) => (
-                        <option key={project.id+"pr"} value={project.id} >{project.name}</option>
+                        <option key={project.id+"pr"} value={project.name} >{project.name}</option>
                     ))}
                     <option disabled hidden key={"pr"} value={""}>{"Project"}</option>
                 </select>
                 <select className="mr-2 select" onChange={handleChange} name={"category"} value={currentActivity.category}>
                     {props.categories.map((category) => (
-                        <option key={category.id+"ct"} value={category.id}>{category.name}</option>
+                        <option key={category.id+"ct"} value={category.name}>{category.name}</option>
                     ))}
                     <option disabled hidden key={"ct"} value={""}>{"Category"}</option>
                 </select>
@@ -73,7 +95,7 @@ const AdminPage = props => {
                             setCurrentActivity(props.initialActivity)
                             return;
                         }
-                        props.updateActivity(currentActivity)
+                        props.updateActivity(currentActivity,date)
                         setCurrentActivity(props.initialActivity)
                     }}>Edit
                     </button></span>}
@@ -85,7 +107,7 @@ const AdminPage = props => {
                 <input type="date" onChange={handleDateChange} value={date} className="form-control-inline w-25 date" />
                 <button onClick={nextDay} className={"btn"} >{">"}</button>
             </div>
-            <div className="tableFixHead">
+            <div >
                 <table className={"table"}>
                     <thead>
                     <tr>
@@ -117,7 +139,13 @@ const AdminPage = props => {
                     <thead>
                     <tr>
                         <th className={"total"} colSpan={"3"}>Total: {totalHours()}</th>
-                        <th scope="col"></th>
+                        <th scope="col">
+                            <div className={"form-group"}>
+                                <button onClick={previousPage} className={"btn"}>{"<"}</button>
+                                Page: {page}
+                                <button onClick={nextPage} className={"btn"}>{">"}</button>
+                            </div>
+                        </th>
                     </tr>
                     </thead>
                 </table>

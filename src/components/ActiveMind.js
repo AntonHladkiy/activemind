@@ -16,7 +16,6 @@ function ActiveMind() {
     const initialActivity={
         id:'',
         user_id:'',
-        name:'',
         project:'',
         category:'',
         hours:'',
@@ -41,7 +40,7 @@ function ActiveMind() {
         if(user){
         if(user.token){
             if(user.token!==''){
-                loadActivities(user.token)
+                loadActivities(user.token,initialActivity,new Date().toISOString().slice(0, 10),1)
                 loadCategories(user.token)
                 loadProjects(user.token)
                 if(user.role==="admin"){
@@ -51,11 +50,14 @@ function ActiveMind() {
             }
         }}},[]
     )
-    const loadActivities=(token,filters,date)=>{
+    const loadActivities=(token,filters,date,page)=>{
         axios.get('http://localhost:3001/api/v1/activities',{
             params:{
-                filters:filters,
-                date:date
+                user_id:filters.user_id,
+                project:filters.project,
+                category:filters.category,
+                date:date,
+                page:page
             },
             headers: {
                 Authorization:token //the token is a variable which holds the token
@@ -80,7 +82,6 @@ function ActiveMind() {
                 Authorization:token //the token is a variable which holds the token
             }})
             .then(res => {
-                console.log(res)
                 setUsers(res.data)
             })
     }
@@ -117,7 +118,7 @@ function ActiveMind() {
                             lastName:res.data.user.lastName
                         }))
                         setLoggedIn(true)
-                        loadActivities(res.data.token)
+                        loadActivities(res.data.token,initialActivity,new Date().toISOString().slice(0, 10),1)
                         loadCategories(res.data.token)
                         loadProjects(res.data.token)
                         if(res.data.role==="admin"){
@@ -132,12 +133,11 @@ function ActiveMind() {
         setLoggedIn(false)
         sessionStorage.removeItem('user')
     }
-    const saveActivity = activity => {
+    const saveActivity = (activity,date) => {
         const qs = require('qs');
         axios.post('http://localhost:3001/api/v1/activities', qs.stringify(
             {
                 activity:{
-                    name: activity.name,
                     project: activity.project,
                     category: activity.category,
                     hours: activity.hours,
@@ -148,25 +148,18 @@ function ActiveMind() {
                 Authorization: user.token,
                 Content_Type: "application/json"
             }})
-            .then(res=>( setActivities(activities=>[...activities, {
-                id:res.data.id,
-                name: activity.name,
-                project: activity.project,
-                category: activity.category,
-                hours: activity.hours,
-                date: activity.date
-            }])))
+            .then(res=>{ loadActivities(user.token,initialActivity,date,1)})
             .catch( error => {
                 alert("Wrong form format try again");
                 console.log(error)
             })
     };
-    const updateActivity = (updatedActivity) => {
+    const updateActivity = (updatedActivity,date) => {
         const qs = require('qs');
         axios.patch ( 'http://localhost:3001/api/v1/activities/' + updatedActivity.id, qs.stringify (
             {
                 activity: {
-                    name: updatedActivity.name,
+                    user_id:updatedActivity.user_id,
                     project: updatedActivity.project,
                     category: updatedActivity.category,
                     hours: updatedActivity.hours,
@@ -176,15 +169,7 @@ function ActiveMind() {
             headers: {
                 Authorization: user.token,
                 Content_Type: "application/json"
-            }}).then ( (res) =>{
-                setActivities(activities=>activities.map(activity => (activity.id === updatedActivity.id ? {
-                    id:updatedActivity.id,
-                    name: updatedActivity.name,
-                    project: updatedActivity.project,
-                    category: updatedActivity.category,
-                    hours: updatedActivity.hours,
-                    date: updatedActivity.date
-                } : activity)))})
+            }}).then ( (res) =>{loadActivities(user.token,initialActivity,date,1)})
             .catch(()=>{
                 alert("Wrong form format try again");
             })
