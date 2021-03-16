@@ -74,7 +74,7 @@ exports[`DeveloperPage should render the DeveloperPage Component correctly 1`] =
       className="form-control-inline w-25 date"
       onChange={[Function]}
       type="date"
-      value="2021-03-15"
+      value="2021-03-16"
     />
     <button
       className="btn"
@@ -83,9 +83,7 @@ exports[`DeveloperPage should render the DeveloperPage Component correctly 1`] =
       &gt;
     </button>
   </div>
-  <div
-    className="tableFixHead"
-  >
+  <div>
     <table
       className="table "
     >
@@ -124,8 +122,24 @@ exports[`DeveloperPage should render the DeveloperPage Component correctly 1`] =
             0
           </th>
           <th
+            className="total"
             scope="col"
-          />
+          >
+            <button
+              className="btn"
+              onClick={[Function]}
+            >
+              &lt;
+            </button>
+            Page: 
+            1
+            <button
+              className="btn"
+              onClick={[Function]}
+            >
+              &gt;
+            </button>
+          </th>
         </tr>
       </thead>
     </table>
