@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/AntonHladkiy/activemind.svg?style=svg)](https://circleci.com/gh/AntonHladkiy/activemind)
-
 Даний проект доступний за [посиланням](https://activemind.herokuapp.com/)
 можливі варіанти логіну:
 
