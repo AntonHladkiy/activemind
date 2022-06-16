@@ -1,4 +1,22 @@
 [![CircleCI](https://circleci.com/gh/AntonHladkiy/activemind.svg?style=svg)](https://circleci.com/gh/AntonHladkiy/activemind)
+Даний проект доступний за [посилання](https://activemind.herokuapp.com/)
+можливі варіанти логіну:
+
+developer role:
+
+email:gladkyy.an@gmail.com
+
+password:password
+
+admin role:
+
+email:admin@gmail.com
+
+password:password
+
+
+
+
 
 # Getting Started with Create React App
 
